@@ -1,0 +1,1 @@
+export const NOTIFY_TOKEN = 'PEesZXSF3GXA47vGCI0xHQ0ZJFlah9JDoIl2Rf3qd5B';
