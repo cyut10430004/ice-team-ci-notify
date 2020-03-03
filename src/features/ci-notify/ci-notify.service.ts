@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CiNotifyService {
-  generateBuildErrorMessage(info: BuildErrorInfo){
+  generateBuildErrorMessage(info: BuildInfo){
     const { projectName, commitMessage, commitUserName, commitBranchName} = info;
     const rowList = [
       '\n',
@@ -11,9 +11,19 @@ export class CiNotifyService {
     ]
     return rowList.reduce((accumulator, currentValue) => accumulator + currentValue);
   }
+
+  generateBuildSuccessMessage(info: BuildInfo){
+    const { projectName, commitMessage, commitUserName, commitBranchName} = info;
+    const rowList = [
+      '\n',
+      `'${projectName}' build success !\n`,
+      `(${commitBranchName}) ${commitUserName} - ${commitMessage}`,
+    ]
+    return rowList.reduce((accumulator, currentValue) => accumulator + currentValue);
+  }
 }
 
-export interface BuildErrorInfo {
+export interface BuildInfo {
   projectName: string;
   commitMessage: string;
   commitUserName: string;
