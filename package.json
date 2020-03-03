@@ -1,26 +1,26 @@
 {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
-  "scripts": {
-    "lint": "eslint .",
-    "serve": "firebase serve --only functions",
-    "shell": "firebase functions:shell",
-    "start": "node index.js",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
-  },
-  "engines": {
-    "node": "8"
-  },
+  "name": "ice-team-ci-notify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index2.js",
   "dependencies": {
     "axios": "^0.19.2",
-    "firebase-admin": "~7.0.0",
-    "firebase-functions": "^2.3.0"
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   },
-  "devDependencies": {
-    "eslint": "^5.12.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6"
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "private": true
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyut10430004/ice-team-ci-notify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyut10430004/ice-team-ci-notify/issues"
+  },
+  "homepage": "https://github.com/cyut10430004/ice-team-ci-notify#readme"
 }
