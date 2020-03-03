@@ -3,6 +3,7 @@ const axios = require('axios');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
+const PORT = process.env.PORT || 3000
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -29,7 +30,7 @@ app.get('/issureList', (req, res) => {
       });
       res.send(result)
     })
-    .catch(e => {
+    .catch(() => {
       res.send('error');
     });
 });
@@ -58,4 +59,4 @@ function getProjectIssureList(projectId) {
   return axios(options).then(res => res.data);
 }
 
-app.listen(3000, () => console.log('Port 3000 is work !'));
+app.listen(PORT, () => console.log(`Port ${PORT} is work !`));
