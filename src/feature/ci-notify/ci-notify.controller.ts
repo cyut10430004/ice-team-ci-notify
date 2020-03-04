@@ -20,7 +20,7 @@ export class CiNotifyController {
 
   @Post('buildSuccess')
   async buildSuccess(@Body() req: BuildInfo, @Headers() { token }): Promise<LineNotifyApiRes> {
-    const message = this.ciNotifyService.generateBuildErrorMessage(req);
+    const message = this.ciNotifyService.generateBuildSuccessMessage(req);
     const res = await this.baseLineNotifyService.sendSuccessStickerMessage(message, token);
     return res;
   }
