@@ -26,7 +26,7 @@ export class CiNotifyController {
   }
 
   @Post('send')
-  async send(@Body() message: string): Promise<LineNotifyApiRes> {
+  async send(@Body() { message }): Promise<LineNotifyApiRes> {
     const res = await this.baseLineNotifyService.sendMessage(message);
     return res;
   }
