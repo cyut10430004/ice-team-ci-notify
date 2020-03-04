@@ -1,53 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import Axios from 'axios';
-import { NOTIFY_TOKEN } from '../configs/line-notify-config';
+import { LineNotifyAction, LineNotify } from '../decorators/line-notify-send';
 
 @Injectable()
 export class BaseLineNotifyService {
-  sendMessage(message) {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${NOTIFY_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      params: { message },
-      url: 'https://notify-api.line.me/api/notify',
-    };
-    return Axios(options).then(res => console.log(res)).catch(res => console.log(res));
-  }
+  // 貼圖 stickerId 對照表
+  // https://devdocs.line.me/files/sticker_list.pdf
 
-  sendSuccessStickerMessage(message) {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${NOTIFY_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      params: {
-         message,
-         stickerPackageId: 1,
-         stickerId: 5
-      },
-      url: 'https://notify-api.line.me/api/notify',
-    };
-    return Axios(options);
-  }
+  @LineNotify()
+  sendMessage: LineNotifyAction;
 
-  sendErrorStickerMessage(message) {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${NOTIFY_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      params: {
-        message,
-        stickerPackageId: 2,
-        stickerId: 524
-      },
-      url: 'https://notify-api.line.me/api/notify',
-    };
-    return Axios(options);
-  }
+  @LineNotify({
+    stickerPackageId: 1,
+    stickerId: 5
+  })
+  sendSuccessStickerMessage: LineNotifyAction;
+
+  @LineNotify({
+    stickerPackageId: 2,
+    stickerId: 524
+  })
+  sendErrorStickerMessage: LineNotifyAction;
 }
