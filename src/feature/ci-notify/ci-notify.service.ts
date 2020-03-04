@@ -9,7 +9,7 @@ export class CiNotifyService {
       `'${projectName}' build error !\n`,
       `(${commitBranchName}) ${commitUserName} - ${commitMessage}`,
     ]
-    return rowList.reduce((accumulator, currentValue) => accumulator + currentValue);
+    return this.rowListToMessage(rowList);
   }
 
   generateBuildSuccessMessage(info: BuildInfo){
@@ -19,6 +19,10 @@ export class CiNotifyService {
       `'${projectName}' build success !\n`,
       `(${commitBranchName}) ${commitUserName} - ${commitMessage}`,
     ]
+    return this.rowListToMessage(rowList);
+  }
+
+  rowListToMessage(rowList: string[]) {
     return rowList.reduce((accumulator, currentValue) => accumulator + currentValue);
   }
 }

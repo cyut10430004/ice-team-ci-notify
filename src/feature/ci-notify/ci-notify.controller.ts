@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Headers } from '@nestjs/common';
 import { BaseLineNotifyService } from 'src/core/services/base-line-notify-service';
 import { CiNotifyService, BuildInfo } from './ci-notify.service';
 import { LineNotifyApiRes } from 'src/core/decorators/line-notify-send';
@@ -12,22 +12,22 @@ export class CiNotifyController {
   ) {}
 
   @Post('buildError')
-  async buildError(@Body() req: BuildInfo): Promise<LineNotifyApiRes> {
+  async buildError(@Body() req: BuildInfo, @Headers() { token }): Promise<LineNotifyApiRes> {
     const message = this.ciNotifyService.generateBuildErrorMessage(req);
-    const res = await this.baseLineNotifyService.sendErrorStickerMessage(message);
+    const res = await this.baseLineNotifyService.sendErrorStickerMessage(message, token);
     return res;
   }
 
   @Post('buildSuccess')
-  async buildSuccess(@Body() req: BuildInfo): Promise<LineNotifyApiRes> {
+  async buildSuccess(@Body() req: BuildInfo, @Headers() { token }): Promise<LineNotifyApiRes> {
     const message = this.ciNotifyService.generateBuildErrorMessage(req);
-    const res = await this.baseLineNotifyService.sendSuccessStickerMessage(message);
+    const res = await this.baseLineNotifyService.sendSuccessStickerMessage(message, token);
     return res;
   }
 
   @Post('send')
-  async send(@Body() { message }): Promise<LineNotifyApiRes> {
-    const res = await this.baseLineNotifyService.sendMessage(message);
+  async send(@Body() { message }, @Headers() { token }): Promise<LineNotifyApiRes> {
+    const res = await this.baseLineNotifyService.sendMessage(message, token);
     return res;
   }
 }
